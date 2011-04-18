@@ -10,4 +10,5 @@
 # directory for testing purposes, master.cfg still needs to be able to
 # load bbproto.  Thus the symlink in this directory called "bbproto."
 print '** loading', __file__, 'as', __name__
-
+import sys
+_initial_modules = set(sys.modules)
