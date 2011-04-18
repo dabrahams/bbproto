@@ -99,7 +99,7 @@ Status and Recommendations
    the root of the source tree.
 
 5. We've clearly failed to avoid **complex module reloading
-   gymnastics**, but if Buildbot folled the recommendation of item 3,
+   gymnastics**, but if Buildbot followed the recommendation of item 3,
    we could.
 
 6. We *have* managed to **avoid explicit `reload(...)` calls** that
