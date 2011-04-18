@@ -4,13 +4,26 @@
 # that we'll use if we want to keep BuildBot's droppings out of our
 # source tree: a symlink to master.cfg in the parent directory.  See
 # __init__.py for more details about the reasons for this
-ln -sf bbproto/master.cfg ../master.cfg 
+
+set -e
+
 cd .. 
-buildbot checkconfig master.cfg
+ln -sf bbproto/master.cfg
+buildbot create-master
+
+buildbot checkconfig
+
+buildbot start
+sleep 1
+buildbot reconfig
+sleep 1
+buildbot stop
 
 # It's also desirable to be able to run checkconfig directly from here
 # during development, using an unmodified source tree and adding no
 # symlinks, so we'll test again.
 echo '#################'
+
+cd bbproto
 buildbot checkconfig
 
