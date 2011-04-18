@@ -33,7 +33,7 @@ Desiderata
    that need to be updated as the source tree changes.
    
 7. Cloning a single configuration repository (and perhaps its
-   submodules) prepares the entire configuration
+   git submodules) prepares the entire configuration
    
 8. Customizations of `buildbot create-master`-generated files (see
    `public_html`) can be stored in the source repository.
@@ -60,27 +60,27 @@ Status and Recommendations
    2011-04-17, `buildbot checkconfig` would do its work in a temporary
    *shallow copy* of the bot directory.  That added a further
    restriction that the symbolic link be absolute and not relative,
-   and complicated the use of submodules.]  Buildbot leaves its
+   and complicated the use of Python submodules.]  Buildbot leaves its
    droppings in the bot directory and the source tree remains
    untouched.  Buildbot could be improved by allowing the user to
    specify separate `--bot-directory=` and configuration file
    arguments on the `create-master` command line so that this symlink
    would be unneeded.
 
-2. **Modular code** implies the ability to use submodules.  That is
-   currently complicated by goals 3 and 4 (see below).  With respect to
-   **flexible organization**, there may be modules we need to get into
-   `sys.path` that aren't directly contained in the configuration
-   directory.  For example, I use a 3rd-party project as git submodule
-   in one of my configurations, and it doesn't have a top-level
-   `__init__.py` file.  Unfortunately, `master.cfg` isn't loaded as an
-   ordinary module and so doesn't get a `__file__` attribute that we
-   can use as the basis for modifications to `sys.path`.  To make such
-   modifications, `master.cfg` must immediately import a module in the
-   same directory so it can reference its `__file__` (in this project,
-   `master.py`).  Buildbot could be improved by giving configuration
-   files some reliable way to find out what directory they were loaded
-   from.
+2. **Modular code** implies the ability to use Python submodules.
+   That is currently complicated by goals 3 and 4 (see below).  With
+   respect to **flexible organization**, there may be modules we need
+   to get into `sys.path` that aren't directly contained in the
+   configuration directory.  For example, I use a 3rd-party project as
+   a git submodule in one of my configurations, and it doesn't have a
+   top-level `__init__.py` file.  Unfortunately, `master.cfg` isn't
+   loaded as an ordinary module and so doesn't get a `__file__`
+   attribute that we can use as the basis for modifications to
+   `sys.path`.  To make such modifications, `master.cfg` must
+   immediately import a module in the same directory so it can
+   reference its `__file__` (in this project, `master.py`).  Buildbot
+   could be improved by giving configuration files some reliable way
+   to find out what directory they were loaded from.
 
 3. `buildbot reconfig` forces the master.cfg file to be reloaded,
    but if you made changes to other files, they won't be reloaded.  In
