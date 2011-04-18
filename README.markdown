@@ -17,8 +17,8 @@ library (along with other enhancements).
 Desiderata
 ----------
 
-1. Maintain a clean source directory (Buildbot leaves droppings in the
-   "bot directory" where it finds the master.cfg file)
+1. Maintain a clean source directory. Buildbot leaves droppings in the
+   directory where it finds the master.cfg file (the "master directory").
    
 2. Support modular code and flexible project organization
 
@@ -55,18 +55,18 @@ Status and Recommendations
 
 1. **A clean source directory** can be maintained only at the cost of
    requiring the user to create a symbolic link to the configuration
-   file from the bot directory, as the `test` script does, *and*
+   file from the master directory, as the `test` script does, *and*
    requiring the source directory to maintain the name `bbotproto` as
    described in the "Testing" section above (traditionally it doesn't
    matter what you call the top-level of a source checkout, but it
-   matters here). Buildbot now leaves its droppings in the bot directory
+   matters here). Buildbot now leaves its droppings in the master directory
    and the source tree remains untouched.  Buildbot could be improved
-   by allowing the user to specify separate `--bot-directory=` and
+   by allowing the user to specify separate `--master-directory=` and
    configuration file arguments on the `create-master` command line so
    that this symlink would be unneeded.
    [In the current release 0.8.3, and in the development trunk prior to
    2011-04-17, `buildbot checkconfig` would do its work in a temporary
-   *shallow copy* of the bot directory.  That added a further
+   *shallow copy* of the master directory.  That added a further
    restriction that the symbolic link be absolute and not relative,
    and complicated the use of Python submodules.]
 
@@ -115,10 +115,10 @@ Status and Recommendations
    create-master`-generated files in the source repository** but the
    user would have to create more symbolic links as part of the
    configuration process.  I'm not sure what to recommend here, yet.
-   Perhaps once there's a separate `--bot-directory` argument, it
+   Perhaps once there's a separate `--master-directory` argument, it
    would work to have Buildbot look first for these files in a
    directory next to the `.cfg` file, and only afterward fall back to
-   the bot directory.
+   the master directory.
 
 9. Did we **avoid complexity?** You be the judge.
 
