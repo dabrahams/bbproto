@@ -55,17 +55,21 @@ Status and Recommendations
 
 1. **A clean source directory** can be maintained only at the cost of
    requiring the user to create a symbolic link to the configuration
-   file from the bot directory, as the `test` script does. [In the
-   current release 0.8.3, and in the development trunk prior to
+   file from the bot directory, as the `test` script does, *and*
+   requiring the source directory to maintain the name `bbotproto` as
+   described in the "Testing" section above (traditionally it doesn't
+   matter what you call the top-level of a source checkout, but it
+   matters here). Buildbot now leaves its droppings in the bot directory
+   and the source tree remains untouched.  Buildbot could be improved
+   by allowing the user to specify separate `--bot-directory=` and
+   configuration file arguments on the `create-master` command line so
+   that this symlink would be unneeded.
+   
+   In the current release 0.8.3, and in the development trunk prior to
    2011-04-17, `buildbot checkconfig` would do its work in a temporary
    *shallow copy* of the bot directory.  That added a further
    restriction that the symbolic link be absolute and not relative,
-   and complicated the use of Python submodules.]  Buildbot leaves its
-   droppings in the bot directory and the source tree remains
-   untouched.  Buildbot could be improved by allowing the user to
-   specify separate `--bot-directory=` and configuration file
-   arguments on the `create-master` command line so that this symlink
-   would be unneeded.
+   and complicated the use of Python submodules.
 
 2. **Modular code** implies the ability to use Python submodules.
    That is currently complicated by goals 3 and 4 (see below).  With
