@@ -64,12 +64,11 @@ Status and Recommendations
    by allowing the user to specify separate `--bot-directory=` and
    configuration file arguments on the `create-master` command line so
    that this symlink would be unneeded.
-   
-   In the current release 0.8.3, and in the development trunk prior to
+   [In the current release 0.8.3, and in the development trunk prior to
    2011-04-17, `buildbot checkconfig` would do its work in a temporary
    *shallow copy* of the bot directory.  That added a further
    restriction that the symbolic link be absolute and not relative,
-   and complicated the use of Python submodules.
+   and complicated the use of Python submodules.]
 
 2. **Modular code** implies the ability to use Python submodules.
    That is currently complicated by goals 3 and 4 (see below).  With
